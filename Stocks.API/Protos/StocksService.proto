@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option csharp_namespace = "Stocks.API";
+
+package stocks;
+
+import "google/protobuf/empty.proto";
+
+service Stocks {
+  rpc GetStock (StockRequest) returns (StockResponse) {}
+  rpc IncreaseStock (StockRequest) returns (StockResponse) {}
+  rpc DecreaseStock (StockRequest) returns (StockResponse) {}
+}
+
+message StockRequest {
+   repeated StockRquestItem items = 1;
+}
+
+message StockResponse {
+  repeated StockResponseItem items = 1;
+}
+
+message StockRquestItem {
+  int64 product_id = 1;
+  int64 quantity = 2;
+}
+
+message StockResponseItem {
+  int64 product_id = 1;
+  bool has_stock = 2;
+}
+

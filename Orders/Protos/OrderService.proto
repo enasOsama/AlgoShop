@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+option csharp_namespace = "Orders.API";
+
+package order;
+
+service Orders {
+  rpc PlaceOrder(OrderRequest) returns (OrderResponse);
+}
+
+message OrderRequest {
+  int64 user_id = 1;
+  repeated OrderItem items = 2;
+}
+
+message OrderItem {
+  int64 product_id = 1;
+  int32 quantity = 2;
+}
+
+message OrderResponse {
+  int64 order_id = 1;
+  OrderStatus status = 2;
+}
+
+enum OrderStatus {
+  Draft = 0;
+  Approved = 1;
+  Cancelled = 2;
+}
